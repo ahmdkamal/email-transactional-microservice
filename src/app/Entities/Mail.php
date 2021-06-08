@@ -91,7 +91,7 @@ class Mail
      */
     public function cc(array|string $addresses): Mail
     {
-        $this->ccs = array_merge($this->tos, $this->parseAddresses($addresses));
+        $this->ccs = array_merge($this->ccs, $this->parseAddresses($addresses));
 
         return $this;
     }

@@ -29,14 +29,14 @@ class SendMailRequest extends FormRequest
             'from_email' => 'required|email',
             'from_name' => 'nullable|string|max:255',
             'to' => 'required|array|min:1',
-            'to.*.0' => 'required|email',
-            'to.*.1' => 'nullable|string|max:255',
+            'to.*.email' => 'required|email',
+            'to.*.name' => 'nullable|string|max:255',
             'cc' => 'array',
-            'cc.*.0' => 'required|email',
-            'cc.*.1' => 'nullable|string|max:255',
-            'bcc' => 'required|array',
-            'bcc.*.0' => 'required|email',
-            'bcc.*.1' => 'nullable|string|max:255',
+            'cc.*.email' => 'required|email',
+            'cc.*.name' => 'nullable|string|max:255',
+            'bcc' => 'array',
+            'bcc.*.email' => 'required|email',
+            'bcc.*.name' => 'nullable|string|max:255',
         ];
     }
 }

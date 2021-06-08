@@ -103,7 +103,7 @@ class Mail
      */
     public function bcc(array|string $addresses): Mail
     {
-        $this->bcs = array_merge($this->tos, $this->parseAddresses($addresses));
+        $this->bcs = array_merge($this->bcs, $this->parseAddresses($addresses));
 
         return $this;
     }

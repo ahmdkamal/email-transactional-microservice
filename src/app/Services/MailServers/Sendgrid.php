@@ -4,6 +4,7 @@ namespace App\Services\MailServers;
 
 use App\Entities\Mail;
 use App\Services\Interfaces\Mailer;
+use Illuminate\Support\Facades\Log;
 use \SendGrid\Mail\Mail as SendGridMail;
 
 class Sendgrid extends Mailer
@@ -26,7 +27,8 @@ class Sendgrid extends Mailer
 
             return true;
         } catch (\Exception $exception) {
-
+            Log::info($exception->getMessage());
+            Log::info($exception->getLine());
         }
 
         return parent::send($mail);
@@ -43,18 +45,21 @@ class Sendgrid extends Mailer
         $email->setSubject($mail->subject);
         $email->setFrom($mail->from[0], $mail->from[1]);
         $email->addContent($mail->contentType, $mail->body);
+
+        foreach ($mail->tos as $to) {
+            $email->addTo($to[0], $to[1]);
+        }
+
         if (!is_null($mail->ccs) && $mail->ccs !== []) {
             foreach ($mail->ccs as $cc) {
                 $email->addCc($cc[0], $cc[1]);
             }
         }
+
         if (!is_null($mail->bcs) && $mail->bcs !== []) {
             foreach ($mail->bcs as $bc) {
                 $email->addBcc($bc[0], $bc[1]);
             }
-        }
-        if (!is_null($mail->bcs) && $mail->bcs !== []) {
-            $email->addBccs($mail->bcs);
         }
 
         return $email;

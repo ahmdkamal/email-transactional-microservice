@@ -62,6 +62,6 @@ class SendMailService implements InterfaceSendMailService
         $email = new Email($mail->toArray());
         $this->emailRepository->save($email);
 
-        SendMailJob::dispatch($this->sendMessage);
+        SendMailJob::dispatch($this->sendMessage, $this->emailRepository, $email->id);
     }
 }

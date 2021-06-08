@@ -22,6 +22,9 @@ class Email extends Model
         0 => 'Queued',
         1 => 'Bounced',
         2 => 'Delivered',
+
+        'Bounced' => 1,
+        'Delivered' => 2,
     ];
 
     public function getStatusAttribute()

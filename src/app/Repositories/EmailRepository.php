@@ -11,4 +11,9 @@ class EmailRepository implements InterfaceEmailRepository
     {
         return $email->save();
     }
+
+    public function findById(int $id): Email
+    {
+        return Email::query()->findOrFail($id);
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use Illuminate\Support\Arr;
+
 class Mail
 {
     public string $body = 'Hello World';
@@ -113,8 +115,8 @@ class Mail
      */
     protected function parseAddresses($addresses): array
     {
-        return is_array($addresses) ? collect($addresses)->map(function (mixed $name, string $address) {
-            return [$address, is_numeric($name) ? null : $name];
+        return is_array($addresses) ? collect($addresses)->map(function (array $address) {
+            return [$address['email'], Arr::has($address, 'name') && is_string($address['name']) ? $address['name'] : null];
         })->values()->all() : [];
     }
 }

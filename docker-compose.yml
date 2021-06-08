@@ -51,6 +51,15 @@ services:
     networks:
       - takeaway_network
 
+  takeaway_redis:
+    image: redis
+    container_name: takeaway_redis
+    hostname: takeaway_redis
+    ports:
+      - "7339:6379"
+    networks:
+      - takeaway_network
+
 networks:
   takeaway_network:
     driver: bridge

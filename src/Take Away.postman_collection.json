@@ -32,7 +32,83 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Send Message",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"body\": \"Hello World\",\n    \"subject\": \"Hello World\",\n    \"from_email\": \"aka.3awd@gmail.com\",\n    \"from_name\": \"Ahmad Kamal\",\n    \"to\": [\n        {\n            \"name\": \"Kamal\",\n            \"email\": \"ahmad.abukamal5@gmail.com\"\n        }\n    ],\n    \"cc\": [],\n    \"bcc\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/messages/send",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"messages",
+								"send"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 08 Jun 2021 19:54:15 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Your messages has been queued successfully!\",\n    \"data\": []\n}"
+				}
+			]
 		}
 	],
 	"event": [

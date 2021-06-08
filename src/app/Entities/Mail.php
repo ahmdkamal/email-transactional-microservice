@@ -119,4 +119,21 @@ class Mail
             return [$address['email'], Arr::has($address, 'name') && is_string($address['name']) ? $address['name'] : null];
         })->values()->all() : [];
     }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'from_email' => $this->from[0],
+            'from_name' => $this->from[1],
+            'subject' => $this->subject,
+            'body' => $this->body,
+            'content_type' => $this->contentType,
+            'tos' => $this->tos,
+            'ccs' => $this->ccs,
+            'bccs' => $this->bcs,
+        ];
+    }
 }

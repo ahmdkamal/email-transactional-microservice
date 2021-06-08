@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\EmailRepository;
+use App\Repositories\Interfaces\InterfaceEmailRepository;
 use App\Services\Interfaces\InterfaceSendMailService;
 use App\Services\Interfaces\InterfaceSendMessage;
 use App\Services\SendMailService;
@@ -29,5 +31,6 @@ class InterfaceServiceProvider extends ServiceProvider
     {
         $this->app->bind(InterfaceSendMessage::class, SendMessage::class);
         $this->app->bind(InterfaceSendMailService::class, SendMailService::class);
+        $this->app->bind(InterfaceEmailRepository::class, EmailRepository::class);
     }
 }

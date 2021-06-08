@@ -1,0 +1,56 @@
+version: "3.7"
+services:
+  takeaway_webserver:
+    image: nginx:alpine
+    container_name: takeaway_webserver
+    restart: unless-stopped
+    ports:
+      - "7336:80"
+      - "7337:443"
+    volumes:
+      - ./src:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d/
+      - ./nginx/logs/:/var/log/nginx/
+    networks:
+      - takeaway_network
+
+  takeaway_www:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: takeaway_www
+    working_dir: /var/www
+    expose:
+      - 9000
+    depends_on:
+      - takeaway_db
+    volumes:
+      - ./src:/var/www/
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - takeaway_network
+
+  takeaway_db:
+    image: mysql:5.7
+    container_name: takeaway_db
+    hostname: takeaway_db
+    platform: linux/x86_64
+    restart: unless-stopped
+    ports:
+      - "7338:3306"
+    environment:
+       MYSQL_DATABASE: ${MYSQL_DATABASE}
+       MYSQL_USER: ${MYSQL_USERNAME}
+       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - ./conf:/etc/mysql/conf.d
+      - ./data:/var/lib/mysql
+    networks:
+      - takeaway_network
+
+networks:
+  takeaway_network:
+    driver: bridge

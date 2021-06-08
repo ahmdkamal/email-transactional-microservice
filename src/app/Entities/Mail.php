@@ -113,8 +113,8 @@ class Mail
      */
     protected function parseAddresses($addresses): array
     {
-        return collect($addresses)->map(function (mixed $name, string $address) {
+        return is_array($addresses) ? collect($addresses)->map(function (mixed $name, string $address) {
             return [$address, is_numeric($name) ? null : $name];
-        })->values()->all();
+        })->values()->all() : [];
     }
 }

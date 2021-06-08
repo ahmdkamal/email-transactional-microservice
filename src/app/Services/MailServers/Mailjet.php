@@ -4,6 +4,7 @@ namespace App\Services\MailServers;
 
 use App\Entities\Mail;
 use App\Services\Interfaces\Mailer;
+use Illuminate\Support\Facades\Log;
 use \Mailjet\Client as MailJetClient;
 use Mailjet\Resources;
 
@@ -22,13 +23,13 @@ class Mailjet extends Mailer
     public function send(Mail $mail): bool
     {
         try {
-            $mailJetClient = new MailJetClient($this->apiKey, $this->apiSecret);
+            Log::info('We are in Mailjet');
+            $mailJetClient = new MailJetClient($this->apiKey, $this->apiSecret, true, ['version' => 'v3.1']);
             $body = $this->buildEmailObject($mail);
             $response = $mailJetClient->post(Resources::$Email, ['body' => $body]);
-
             throw_if(!$response->success(), new \Exception('Something went wrong!'));
         } catch (\Exception $exception) {
-
+            Log::info($exception->getMessage());
         }
 
         return parent::send($mail);
@@ -66,7 +67,7 @@ class Mailjet extends Mailer
             $body['HTMLPart'] = $mail->body;
         }
 
-        return ['Messages' => $body];
+        return ['Messages' => [$body]];
     }
 
     /**
@@ -78,13 +79,15 @@ class Mailjet extends Mailer
     {
         $data = [];
 
-        foreach ($receptions as $to) {
-            $data['Email'] = $to[0];
+        foreach ($receptions as $reception) {
+            $user = [];
+            $user['Email'] = $reception[0];
 
             if (isset($to[1])) {
-                $body['Name'] = $to[1];
+                $user['Name'] = $to[1];
             }
-            $body[] = $data;
+
+            $data[] = $user;
         }
 
         return $data;

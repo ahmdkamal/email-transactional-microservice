@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "baad5903-489e-4bf6-967d-24cc5d85013f",
+		"name": "Take Away",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": \"Hello World\",\n    \"subject\": \"Hello World\",\n    \"from_email\": \"aka.3awd@gmail.com\",\n    \"from_name\": \"Ahmad Kamal\",\n    \"to\": [\n        {\n            \"name\": \"Kamal\",\n            \"email\": \"ahmad.abukamal5@gmail.com\"\n        }\n    ],\n    \"cc\": [],\n    \"bcc\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/messages/send",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"messages",
+						"send"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:7336"
+		}
+	]
+}

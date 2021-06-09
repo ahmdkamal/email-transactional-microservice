@@ -2,10 +2,17 @@
 
 namespace App\Services\Interfaces;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 interface InterfaceSendMailService
 {
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function index(Request $request): LengthAwarePaginator;
+
     /**
      * @param Request $request
      */

@@ -3,9 +3,12 @@
 namespace App\Repositories\Interfaces;
 
 use App\Models\Email;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface InterfaceEmailRepository
 {
+    public function index($perPage = 15): LengthAwarePaginator;
+
     /**
      * @param Email $email
      * @return bool

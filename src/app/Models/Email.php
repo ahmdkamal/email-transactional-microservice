@@ -27,8 +27,8 @@ class Email extends Model
         'Delivered' => 2,
     ];
 
-    public function getStatusAttribute()
+    public function getStatusAsStringAttribute()
     {
-        return self::STATUSES[$this->status];
+        return self::STATUSES[$this->getAttribute('status')];
     }
 }

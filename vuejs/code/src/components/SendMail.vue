@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     sendMessage: function () {
-      axios.post('http://localhost:7336/api/v1/messages/send', {
+      axios.post('http://localhost:7336/api/v1/mails', {
         from_name: this.from_name,
         from_email: this.from_email,
         to: [

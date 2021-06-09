@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::post('messages/send', [SendMailController::class, 'send']);
+    Route::apiResource('mails', SendMailController::class)->only('index', 'store');
 });

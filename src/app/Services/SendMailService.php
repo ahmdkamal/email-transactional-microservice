@@ -10,6 +10,7 @@ use App\Services\Interfaces\InterfaceSendMailService;
 use App\Services\Interfaces\InterfaceSendMessage;
 use App\Services\MailServers\Mailjet;
 use App\Services\MailServers\Sendgrid;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 class SendMailService implements InterfaceSendMailService
@@ -36,6 +37,15 @@ class SendMailService implements InterfaceSendMailService
     {
         $this->sendMessage = $sendMessage;
         $this->emailRepository = $emailRepository;
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function index(Request $request): LengthAwarePaginator
+    {
+        return $this->emailRepository->index($request->per_page ?? 15);
     }
 
     /**

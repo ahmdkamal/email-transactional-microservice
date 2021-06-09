@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Send Message",
+			"name": "Send Mail",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -20,21 +20,20 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/v1/messages/send",
+					"raw": "{{url}}/api/v1/mails",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"v1",
-						"messages",
-						"send"
+						"mails"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Send Message",
+					"name": "Send Mail",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -48,15 +47,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/messages/send",
+							"raw": "{{url}}/api/v1/mails",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"messages",
-								"send"
+								"mails"
 							]
 						}
 					},
@@ -107,6 +105,103 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"message\": \"Your messages has been queued successfully!\",\n    \"data\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Mails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/mails?per_page=15",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"mails"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Mails",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/mails?per_page=15",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"mails"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 09 Jun 2021 16:35:04 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 3,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Delivered\",\n            \"created_at\": \"20 hours ago\"\n        },\n        {\n            \"id\": 4,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Delivered\",\n            \"created_at\": \"20 hours ago\"\n        },\n        {\n            \"id\": 5,\n            \"body\": \"World\",\n            \"subject\": \"Hello\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"KAMAL\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Bounced\",\n            \"created_at\": \"19 hours ago\"\n        },\n        {\n            \"id\": 6,\n            \"body\": \"Hello\",\n            \"subject\": \"Hello\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Queued\",\n            \"created_at\": \"5 hours ago\"\n        },\n        {\n            \"id\": 7,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Queued\",\n            \"created_at\": \"2 hours ago\"\n        },\n        {\n            \"id\": 8,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Queued\",\n            \"created_at\": \"2 hours ago\"\n        },\n        {\n            \"id\": 9,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Queued\",\n            \"created_at\": \"1 hour ago\"\n        },\n        {\n            \"id\": 10,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Delivered\",\n            \"created_at\": \"1 hour ago\"\n        },\n        {\n            \"id\": 11,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Queued\",\n            \"created_at\": \"1 hour ago\"\n        },\n        {\n            \"id\": 12,\n            \"body\": \"Hello World\",\n            \"subject\": \"Hello World\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Ahmad Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Delivered\",\n            \"created_at\": \"1 hour ago\"\n        },\n        {\n            \"id\": 13,\n            \"body\": \"Hello\",\n            \"subject\": \"Hello\",\n            \"from_email\": \"aka.3awd@gmail.com\",\n            \"from_name\": \"Kamal\",\n            \"to\": [],\n            \"cc\": [],\n            \"bcc\": [],\n            \"status\": \"Delivered\",\n            \"created_at\": \"1 hour ago\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:7336/api/v1/mails?page=1\",\n        \"last\": \"http://localhost:7336/api/v1/mails?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:7336/api/v1/mails?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:7336/api/v1/mails\",\n        \"per_page\": \"15\",\n        \"to\": 11,\n        \"total\": 11\n    }\n}"
 				}
 			]
 		}

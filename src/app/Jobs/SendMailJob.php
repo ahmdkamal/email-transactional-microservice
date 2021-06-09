@@ -15,10 +15,19 @@ class SendMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /**
+     * @var InterfaceSendMessage
+     */
     protected InterfaceSendMessage $sendMessage;
 
+    /**
+     * @var InterfaceEmailRepository
+     */
     protected InterfaceEmailRepository $emailRepository;
 
+    /**
+     * @var int
+     */
     protected int $emailId;
 
     /**

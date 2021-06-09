@@ -22,6 +22,10 @@ abstract class Mailer
         return $next;
     }
 
+    /**
+     * @param Mail $mail
+     * @return bool
+     */
     public function send(Mail $mail): bool
     {
         if (!$this->next) {
@@ -31,5 +35,9 @@ abstract class Mailer
         return $this->next->send($mail);
     }
 
+    /**
+     * @param Mail $mail
+     * @return mixed
+     */
     protected abstract function buildEmailObject(Mail $mail);
 }

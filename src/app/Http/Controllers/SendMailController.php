@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SendMailRequest;
 use App\Services\Interfaces\InterfaceSendMailService;
+use Illuminate\Http\JsonResponse;
 
 class SendMailController extends Controller
 {
@@ -14,7 +15,11 @@ class SendMailController extends Controller
         $this->mailService = $mailService;
     }
 
-    public function send(SendMailRequest $request)
+    /**
+     * @param SendMailRequest $request
+     * @return JsonResponse
+     */
+    public function send(SendMailRequest $request): JsonResponse
     {
         $this->mailService->send($request);
         return response()->json([

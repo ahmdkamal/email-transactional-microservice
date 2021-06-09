@@ -14,8 +14,14 @@ use Illuminate\Http\Request;
 
 class SendMailService implements InterfaceSendMailService
 {
+    /**
+     * @var InterfaceSendMessage
+     */
     protected InterfaceSendMessage $sendMessage;
 
+    /**
+     * @var InterfaceEmailRepository
+     */
     protected InterfaceEmailRepository $emailRepository;
 
     /**

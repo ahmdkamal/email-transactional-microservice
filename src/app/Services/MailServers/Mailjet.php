@@ -10,16 +10,32 @@ use Mailjet\Resources;
 
 class Mailjet extends Mailer
 {
+    /**
+     * @var string
+     */
     protected string $apiKey;
 
+    /**
+     * @var string
+     */
     protected string $apiSecret;
 
+    /**
+     * Mailjet constructor.
+     * @param string $apiKey
+     * @param string $apiSecret
+     */
     public function __construct(string $apiKey, string $apiSecret)
     {
         $this->apiKey = $apiKey;
         $this->apiSecret = $apiSecret;
     }
 
+    /**
+     * @param Mail $mail
+     * @return bool
+     * @throws \Throwable
+     */
     public function send(Mail $mail): bool
     {
         try {

@@ -9,13 +9,25 @@ use \SendGrid\Mail\Mail as SendGridMail;
 
 class Sendgrid extends Mailer
 {
+    /**
+     * @var string
+     */
     protected string $apiKey;
 
+    /**
+     * Sendgrid constructor.
+     * @param string $apiKey
+     */
     public function __construct(string $apiKey)
     {
         $this->apiKey = $apiKey;
     }
 
+    /**
+     * @param Mail $mail
+     * @return bool
+     * @throws \Throwable
+     */
     public function send(Mail $mail): bool
     {
         try {

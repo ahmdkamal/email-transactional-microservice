@@ -53,10 +53,28 @@ services:
 
   takeaway_redis:
     image: redis
+    restart: unless-stopped
     container_name: takeaway_redis
     hostname: takeaway_redis
     ports:
       - "7339:6379"
+    networks:
+      - takeaway_network
+
+  takeaway_supervisor:
+    build:
+      context: ./supervisor
+      dockerfile: Dockerfile
+    container_name: takeaway_supervisor
+    restart: unless-stopped
+    environment:
+      - APP_ROOT=/var/www
+      - OPTIONS=${QUEUE_OPTIONS}
+      - QUEUE_DRIVER=${QUEUE_CONNECTION}
+      - NUM_PROCS=${NUM_PROCS}
+    volumes:
+      - ./src:/var/www
+      - ./supervisor/supervisord.conf:/etc/supervisord.conf
     networks:
       - takeaway_network
 

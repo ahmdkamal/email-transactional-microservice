@@ -74,10 +74,10 @@ class Mail
 
     /**
      * Set Mail's to
-     * @param array|string $addresses
+     * @param array|null|string $addresses
      * @return $this
      */
-    public function to(array|string $addresses): Mail
+    public function to(array|null|string $addresses): Mail
     {
         $this->tos = array_merge($this->tos, $this->parseAddresses($addresses));
 
@@ -86,10 +86,10 @@ class Mail
 
     /**
      * Set Mail's cc
-     * @param array|string $addresses
+     * @param array|null|string $addresses
      * @return $this
      */
-    public function cc(array|string $addresses): Mail
+    public function cc(array|null|string $addresses): Mail
     {
         $this->ccs = array_merge($this->ccs, $this->parseAddresses($addresses));
 
@@ -98,10 +98,10 @@ class Mail
 
     /**
      * Set Mail's bcc
-     * @param array|string $addresses
+     * @param array|null|string $addresses
      * @return $this
      */
-    public function bcc(array|string $addresses): Mail
+    public function bcc(array|null|string $addresses): Mail
     {
         $this->bcs = array_merge($this->bcs, $this->parseAddresses($addresses));
 

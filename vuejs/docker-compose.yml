@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  takeaway_vuejs:
+    build:
+      dockerfile: ./
+      context: .
+    container_name: takeaway_vuejs
+    restart: unless-stopped
+    volumes:
+      - ./code:/app
+    ports:
+      - "7335:8080"
+    networks:
+      - takeaway_takeaway_network
+
+networks:
+  takeaway_takeaway_network:
+    external:
+      name: takeaway_takeaway_network

@@ -23,9 +23,9 @@ class CreateEmailsTable extends Migration
             $table->tinyInteger('status')
                 ->default(0)
                 ->comment('0 for queued, 1 for bounced, 2 for delivered');
-            $table->json('tos');
-            $table->json('ccs')->nullable();
-            $table->json('bccs')->nullable();
+            $table->json('to');
+            $table->json('cc')->nullable();
+            $table->json('bcc')->nullable();
             $table->timestamps();
         });
     }

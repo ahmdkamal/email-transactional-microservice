@@ -9,13 +9,13 @@ class Email extends Model
     protected $fillable = [
         'from_email', 'from_name', 'status',
         'body', 'subject', 'content_type',
-        'tos', 'ccs', 'bccs',
+        'to', 'cc', 'bcc',
     ];
 
     protected $casts = [
-        'tos' => 'array',
-        'ccs' => 'array',
-        'bccs' => 'array',
+        'to' => 'array',
+        'cc' => 'array',
+        'bcc' => 'array',
     ];
 
     const STATUSES = [

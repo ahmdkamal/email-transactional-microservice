@@ -51,7 +51,7 @@ class SendMailService implements InterfaceSendMailService
     public function send(Request $request): void
     {
         $email = new Email($request->all() + ['content_type' => 'text/plain']);
-        $this->emailRepository->save($email);
+        throw_if(!$this->emailRepository->save($email), new \Exception('Something went wrong!', 500));
 
         SendMailJob::dispatch($this->sendMail, $this->emailRepository, $email->id);
     }

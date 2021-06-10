@@ -22,13 +22,11 @@ class Mailjet extends Mailer
 
     /**
      * Mailjet constructor.
-     * @param string $apiKey
-     * @param string $apiSecret
      */
-    public function __construct(string $apiKey, string $apiSecret)
+    public function __construct()
     {
-        $this->apiKey = $apiKey;
-        $this->apiSecret = $apiSecret;
+        $this->apiKey = env('MailJET_KEY');
+        $this->apiSecret = env('MailJET_SECRET');
     }
 
     /**

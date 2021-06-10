@@ -68,8 +68,8 @@ class SendMailService implements InterfaceSendMailService
         // You can manager the order you need if the server failed to send
         // Ex: (new Sendgrid('XXXX')->linkWith(new Mailjet('XXXX', 'XXX'))
         // Will check sendgrid first if failed, it will try Mailjet
-        $servers = new Sendgrid(env('SENDGRID_API_KEY'));
-        $servers->linkWith(new Mailjet(env('MailJET_KEY'), env('MailJET_SECRET')));
+        $servers = new Sendgrid();
+        $servers->linkWith(new Mailjet());
 
         $this->sendMessage
             ->setMail($mail)

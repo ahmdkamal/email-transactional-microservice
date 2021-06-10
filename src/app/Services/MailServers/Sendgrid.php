@@ -16,11 +16,10 @@ class Sendgrid extends Mailer
 
     /**
      * Sendgrid constructor.
-     * @param string $apiKey
      */
-    public function __construct(string $apiKey)
+    public function __construct()
     {
-        $this->apiKey = $apiKey;
+        $this->apiKey = env('SENDGRID_API_KEY');
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Entities\Mail;
 use App\Jobs\SendMailJob;
 use App\Models\Email;
 use App\Repositories\Interfaces\InterfaceEmailRepository;
@@ -54,7 +53,6 @@ class SendMailService implements InterfaceSendMailService
         $email = new Email($request->all() + ['content_type' => 'text/plain']);
         $this->emailRepository->save($email);
 
-        SendMailJob::dispatch($this->sendMail, $this->emailRepository, $email->id)
-            ->onConnection('database');
+        SendMailJob::dispatch($this->sendMail, $this->emailRepository, $email->id);
     }
 }

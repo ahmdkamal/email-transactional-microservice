@@ -6,10 +6,8 @@ use App\Repositories\EmailRepository;
 use App\Repositories\Interfaces\InterfaceEmailRepository;
 use App\Services\Interfaces\InterfaceSendMail;
 use App\Services\Interfaces\InterfaceSendMailService;
-use App\Services\Interfaces\InterfaceMailable;
 use App\Services\SendMail;
 use App\Services\SendMailService;
-use App\Services\Mailable;
 use Illuminate\Support\ServiceProvider;
 
 class InterfaceServiceProvider extends ServiceProvider
@@ -31,7 +29,6 @@ class InterfaceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(InterfaceMailable::class, Mailable::class);
         $this->app->bind(InterfaceEmailRepository::class, EmailRepository::class);
         $this->app->bind(InterfaceSendMailService::class, SendMailService::class);
 

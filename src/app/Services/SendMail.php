@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\InterfaceMailable;
 use App\Services\Interfaces\InterfaceSendMail;
 use App\Services\MailServers\Mailjet;
 use App\Services\MailServers\Sendgrid;
@@ -11,22 +10,9 @@ use App\Services\MailServers\Sendgrid;
 class SendMail implements InterfaceSendMail
 {
     /**
-     * @var InterfaceMailable
-     */
-    protected InterfaceMailable $mailable;
-
-    /**
-     * SendMail constructor.
-     * @param InterfaceMailable $mailable
-     */
-    public function __construct(InterfaceMailable $mailable)
-    {
-        $this->mailable = $mailable;
-    }
-
-    /**
      * @param Mail $mail
      * @return bool
+     * @throws \Throwable
      */
     public function send(Mail $mail): bool
     {
@@ -39,10 +25,6 @@ class SendMail implements InterfaceSendMail
         $servers = new Sendgrid();
         $servers->linkWith(new Mailjet());
 
-        $this->mailable
-            ->setMail($mail)
-            ->setMailServer($servers);
-
-        return $this->mailable->send();
+        return $servers->send($mail);
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Services\MailServers;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\Mailer;
+use App\Services\Interfaces\InterfaceMailServer;
 use Illuminate\Support\Facades\Log;
 use \SendGrid\Mail\Mail as SendGridMail;
 
-class Sendgrid extends Mailer
+class Sendgrid implements InterfaceMailServer
 {
     /**
      * @var string
@@ -42,7 +42,7 @@ class Sendgrid extends Mailer
             Log::info($exception->getLine());
         }
 
-        return parent::send($mail);
+        return false;
     }
 
     /**
@@ -50,7 +50,7 @@ class Sendgrid extends Mailer
      * @return SendGridMail
      * @throws \SendGrid\Mail\TypeException
      */
-    protected function buildEmailObject(Mail $mail): SendGridMail
+    public function buildEmailObject(Mail $mail): SendGridMail
     {
         $email = new SendGridMail();
         $email->setSubject($mail->subject);

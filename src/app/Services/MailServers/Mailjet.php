@@ -3,12 +3,12 @@
 namespace App\Services\MailServers;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\Mailer;
+use App\Services\Interfaces\InterfaceMailServer;
 use Illuminate\Support\Facades\Log;
 use \Mailjet\Client as MailJetClient;
 use Mailjet\Resources;
 
-class Mailjet extends Mailer
+class Mailjet implements InterfaceMailServer
 {
     /**
      * @var string
@@ -42,18 +42,20 @@ class Mailjet extends Mailer
             $body = $this->buildEmailObject($mail);
             $response = $mailJetClient->post(Resources::$Email, ['body' => $body]);
             throw_if(!$response->success(), new \Exception('Something went wrong!'));
+
+            return true;
         } catch (\Exception $exception) {
             Log::info($exception->getMessage());
         }
 
-        return parent::send($mail);
+        return false;
     }
 
     /**
      * @param Mail $mail
      * @return array[]
      */
-    protected function buildEmailObject(Mail $mail): array
+    public function buildEmailObject(Mail $mail): array
     {
         $body = [
             'From' => [

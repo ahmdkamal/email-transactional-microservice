@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Entities\Mail;
 use App\Models\Email;
 use App\Repositories\Interfaces\InterfaceEmailRepository;
 use App\Services\Interfaces\InterfaceSendMail;
@@ -54,15 +55,22 @@ class SendMailJob implements ShouldQueue
      */
     public function handle()
     {
-        try {
-            $email = $this->emailRepository->findById($this->emailId);
-            $status = $this->sendMessage->send();
-            $email->fill([
-                'status' => $status ? Email::STATUSES['Delivered'] : Email::STATUSES['Bounced'],
-            ]);
-            $this->emailRepository->save($email);
-        } catch (\Exception $exception) {
+        $email = $this->emailRepository->findById($this->emailId);
 
-        }
+        $mail = (new Mail())
+            ->subject($email->subject)
+            ->body($email->body)
+            ->from($email->from_email, $email->from_name)
+            ->to($email->to)
+            ->cc($email->cc)
+            ->bcc($email->bcc);
+
+        $status = $this->sendMessage->send($mail);
+
+        $email->fill([
+            'status' => $status ? Email::STATUSES['Delivered'] : Email::STATUSES['Bounced'],
+        ]);
+
+        $this->emailRepository->save($email);
     }
 }

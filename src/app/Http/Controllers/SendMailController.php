@@ -45,6 +45,6 @@ class SendMailController extends Controller
         return response()->json([
             'message' => 'Your messages has been queued successfully!',
             'data' => [],
-        ], 200);
+        ], 201);
     }
 }

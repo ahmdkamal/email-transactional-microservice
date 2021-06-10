@@ -6,7 +6,7 @@ use App\Entities\Mail;
 use App\Services\Interfaces\InterfaceSendMessage;
 use App\Services\Interfaces\Mailer;
 
-class SendMessage implements InterfaceSendMessage
+class SendMail implements InterfaceSendMessage
 {
     /**
      * @var Mail
@@ -22,7 +22,7 @@ class SendMessage implements InterfaceSendMessage
      * @param Mail $mail
      * @return $this
      */
-    public function setMail(Mail $mail): SendMessage
+    public function setMail(Mail $mail): SendMail
     {
         $this->mail = $mail;
         return $this;
@@ -32,7 +32,7 @@ class SendMessage implements InterfaceSendMessage
      * @param Mailer $mailer
      * @return $this
      */
-    public function setMailServer(Mailer $mailer): SendMessage
+    public function setMailServer(Mailer $mailer): SendMail
     {
         $this->mailer = $mailer;
         return $this;

@@ -7,7 +7,7 @@ use App\Jobs\SendMailJob;
 use App\Models\Email;
 use App\Repositories\Interfaces\InterfaceEmailRepository;
 use App\Services\Interfaces\InterfaceSendMailService;
-use App\Services\Interfaces\InterfaceSendMessage;
+use App\Services\Interfaces\InterfaceSendMail;
 use App\Services\MailServers\Mailjet;
 use App\Services\MailServers\Sendgrid;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -16,9 +16,9 @@ use Illuminate\Http\Request;
 class SendMailService implements InterfaceSendMailService
 {
     /**
-     * @var InterfaceSendMessage
+     * @var InterfaceSendMail
      */
-    protected InterfaceSendMessage $sendMessage;
+    protected InterfaceSendMail $sendMail;
 
     /**
      * @var InterfaceEmailRepository
@@ -27,15 +27,15 @@ class SendMailService implements InterfaceSendMailService
 
     /**
      * SendMailService constructor.
-     * @param InterfaceSendMessage $sendMessage
+     * @param InterfaceSendMail $sendMail
      * @param InterfaceEmailRepository $emailRepository
      */
     public function __construct(
-        InterfaceSendMessage $sendMessage,
+        InterfaceSendMail $sendMail,
         InterfaceEmailRepository $emailRepository
     )
     {
-        $this->sendMessage = $sendMessage;
+        $this->sendMail = $sendMail;
         $this->emailRepository = $emailRepository;
     }
 
@@ -71,13 +71,13 @@ class SendMailService implements InterfaceSendMailService
         $servers = new Sendgrid();
         $servers->linkWith(new Mailjet());
 
-        $this->sendMessage
+        $this->sendMail
             ->setMail($mail)
             ->setMailServer($servers);
 
         $email = new Email($mail->toArray());
         $this->emailRepository->save($email);
 
-        SendMailJob::dispatch($this->sendMessage, $this->emailRepository, $email->id);
+        SendMailJob::dispatch($this->sendMail, $this->emailRepository, $email->id);
     }
 }

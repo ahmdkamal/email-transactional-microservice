@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Email;
 use App\Repositories\Interfaces\InterfaceEmailRepository;
-use App\Services\Interfaces\InterfaceSendMessage;
+use App\Services\Interfaces\InterfaceSendMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,9 +16,9 @@ class SendMailJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * @var InterfaceSendMessage
+     * @var InterfaceSendMail
      */
-    protected InterfaceSendMessage $sendMessage;
+    protected InterfaceSendMail $sendMessage;
 
     /**
      * @var InterfaceEmailRepository
@@ -32,12 +32,12 @@ class SendMailJob implements ShouldQueue
 
     /**
      * SendMailJob constructor.
-     * @param InterfaceSendMessage $sendMessage
+     * @param InterfaceSendMail $sendMessage
      * @param InterfaceEmailRepository $emailRepository
      * @param int $emailId
      */
     public function __construct(
-        InterfaceSendMessage $sendMessage,
+        InterfaceSendMail $sendMessage,
         InterfaceEmailRepository $emailRepository,
         int $emailId
     )

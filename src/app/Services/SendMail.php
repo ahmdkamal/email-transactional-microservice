@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\InterfaceSendMessage;
+use App\Services\Interfaces\InterfaceSendMail;
 use App\Services\Interfaces\Mailer;
 
-class SendMail implements InterfaceSendMessage
+class SendMail implements InterfaceSendMail
 {
     /**
      * @var Mail

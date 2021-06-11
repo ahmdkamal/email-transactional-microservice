@@ -25,8 +25,8 @@ class Mailjet implements InterfaceMailServer
      */
     public function __construct()
     {
-        $this->apiKey = env('MailJET_KEY');
-        $this->apiSecret = env('MailJET_SECRET');
+        $this->apiKey = env('MailJET_KEY', '');
+        $this->apiSecret = env('MailJET_SECRET', '');
     }
 
     /**

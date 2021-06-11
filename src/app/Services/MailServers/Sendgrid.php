@@ -19,7 +19,7 @@ class Sendgrid implements InterfaceMailServer
      */
     public function __construct()
     {
-        $this->apiKey = env('SENDGRID_API_KEY');
+        $this->apiKey = env('SENDGRID_API_KEY', '');
     }
 
     /**

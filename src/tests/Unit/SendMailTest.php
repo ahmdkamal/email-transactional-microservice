@@ -3,13 +3,21 @@
 namespace Tests\Unit;
 
 use App\Entities\Mail;
+use App\Services\Interfaces\InterfaceSendMail;
 use App\Services\MailServers\Mailjet;
 use App\Services\MailServers\Sendgrid;
-use App\Services\SendMail;
 use Tests\TestCase;
 
 class SendMailTest extends TestCase
 {
+    protected InterfaceSendMail $sendMail;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->sendMail = $this->app->get(InterfaceSendMail::class);
+    }
+
     public function testMainServiceWillReturnTrue()
     {
         // Main
@@ -22,9 +30,10 @@ class SendMailTest extends TestCase
             ->willReturn(true);
 
         // Send Mail
-        $sendMail = new SendMail($mainService, []);
+        $this->sendMail
+            ->setMainServer($mainService);
 
-        $this->assertTrue($sendMail->send(new Mail));
+        $this->assertTrue($this->sendMail->send(new Mail));
     }
 
     public function testMainServiceWillReturnFalseAndFallbackWillReturnTrue()
@@ -47,12 +56,11 @@ class SendMailTest extends TestCase
             ->method('send')
             ->willReturn(true);
 
-        // Send Mail
-        $sendMail = new SendMail($mainService, [
-            $fallbackService
-        ]);
+        $this->sendMail
+            ->setMainServer($mainService)
+            ->setFallbackServers([$fallbackService]);
 
-        $this->assertTrue($sendMail->send(new Mail));
+        $this->assertTrue($this->sendMail->send(new Mail));
     }
 
     public function testNoServiceWillReturnTrue()
@@ -75,11 +83,10 @@ class SendMailTest extends TestCase
             ->method('send')
             ->willReturn(false);
 
-        // Send Mail
-        $sendMail = new SendMail($mainService, [
-            $fallbackService
-        ]);
+        $this->sendMail
+            ->setMainServer($mainService)
+            ->setFallbackServers([$fallbackService]);
 
-        $this->assertFalse($sendMail->send(new Mail));
+        $this->assertFalse($this->sendMail->send(new Mail));
     }
 }

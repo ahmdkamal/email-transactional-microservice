@@ -48,4 +48,27 @@ class SendMail implements InterfaceSendMail
 
         return false;
     }
+
+    /**
+     * To Set the main server to send with
+     *
+     * @param InterfaceMailServer $mainServer
+     * @return $this
+     */
+    public function setMainServer(InterfaceMailServer $mainServer): SendMail
+    {
+        $this->mainServer = $mainServer;
+        return $this;
+    }
+
+    /**
+     * To Set the fallback servers
+     * @param array<InterfaceSendMail> $fallbackServers
+     * @return $this
+     */
+    public function setFallbackServers(array $fallbackServers): SendMail
+    {
+        $this->fallbackServers = $fallbackServers;
+        return $this;
+    }
 }

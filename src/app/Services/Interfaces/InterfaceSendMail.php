@@ -11,4 +11,18 @@ interface InterfaceSendMail
      * @return bool
      */
     public function send(Mail $mail): bool;
+
+    /**
+     * To Set the main server to send with
+     * @param InterfaceMailServer $mainServer
+     * @return InterfaceSendMail
+     */
+    public function setMainServer(InterfaceMailServer $mainServer): InterfaceSendMail;
+
+    /**
+     * To Set the fallback servers
+     * @param array<InterfaceSendMail> $fallbackServers
+     * @return $this
+     */
+    public function setFallbackServers(array $fallbackServers): InterfaceSendMail;
 }

@@ -6,14 +6,12 @@ services:
       context: .
     container_name: takeaway_vuejs
     restart: unless-stopped
-    volumes:
-      - ./code:/app
     ports:
       - "7335:8080"
     networks:
-      - takeaway_takeaway_network
+      - takeaway_network
 
 networks:
-  takeaway_takeaway_network:
+  takeaway_network:
     external:
-      name: takeaway_takeaway_network
+      name: takeaway_network

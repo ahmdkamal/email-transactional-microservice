@@ -81,3 +81,4 @@ services:
 networks:
   takeaway_network:
     driver: bridge
+    name: takeaway_network

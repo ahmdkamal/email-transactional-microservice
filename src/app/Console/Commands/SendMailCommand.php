@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Requests\SendMailRequest;
 use App\Services\Interfaces\InterfaceSendMailService;
 use Illuminate\Console\Command;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SendMailCommand extends Command
 {
@@ -13,14 +14,14 @@ class SendMailCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'send:mail {subject} {body} {from_email} {tos?*} {--from_name=} {--ccs=*} {--bccs=*}';
+    protected $signature = 'send:mail {subject} {body} {from_email} {to?*} {--from_name=} {--cc=*} {--bcc=*}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send Mail {from_email} {subject} {body} {tos?*} {--from_name=} {--ccs=*} {--bccs=*}';
+    protected $description = 'Send Mail {from_email} {subject} {body} {to?*} {--from_name=} {--cc=*} {--bcc=*}';
 
     /**
      * The Mail Service to send message
@@ -29,8 +30,13 @@ class SendMailCommand extends Command
     protected InterfaceSendMailService $mailService;
 
     /**
-     * Create a new command instance.
-     *
+     * The Mail Request Form to Validate message
+     * @var SendMailRequest
+     */
+    protected SendMailRequest $sendMailRequest;
+
+    /**
+     * SendMailCommand constructor.
      * @param InterfaceSendMailService $mailService
      */
     public function __construct(InterfaceSendMailService $mailService)
@@ -54,20 +60,23 @@ class SendMailCommand extends Command
             'body' => $arguments['body'],
             'from_email' => $arguments['from_email'],
             'from_name' => $options['from_name'],
-            'to' => collect($arguments['tos'])->map(function ($to) {
+            'to' => collect($arguments['to'])->map(function ($to) {
                 return json_decode($to, true);
             })->values()->all(),
-            'cc' => collect($options['ccs'])->map(function ($to) {
+            'cc' => collect($options['cc'])->map(function ($to) {
                 return json_decode($to, true);
             })->values()->all(),
-            'bcc' => collect($options['bccs'])->map(function ($to) {
+            'bcc' => collect($options['bcc'])->map(function ($to) {
                 return json_decode($to, true);
             })->values()->all(),
         ];
 
-        $request = new Request($data);
+        $request = new SendMailRequest($data);
+
+        Validator::make($request->all(), $request->rules())->validate();
 
         $this->mailService->send($request);
+
         return 1;
     }
 }

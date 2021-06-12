@@ -9,12 +9,26 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class EmailRepository implements InterfaceEmailRepository
 {
     /**
+     * @var Email
+     */
+    protected Email $emailModel;
+
+    /**
+     * EmailRepository constructor.
+     * @param Email $emailModel
+     */
+    public function __construct(Email $emailModel)
+    {
+        $this->emailModel = $emailModel;
+    }
+
+    /**
      * @param int $perPage
      * @return LengthAwarePaginator
      */
     public function index($perPage = 15): LengthAwarePaginator
     {
-        return Email::query()->paginate($perPage);
+        return $this->emailModel->query()->paginate($perPage);
     }
 
     /**
@@ -32,6 +46,6 @@ class EmailRepository implements InterfaceEmailRepository
      */
     public function findById(int $id): Email
     {
-        return Email::query()->findOrFail($id);
+        return $this->emailModel->query()->findOrFail($id);
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 style="margin-bottom: 10px"> Send Message </h2>
-    <form v-on:submit.prevent="sendMessage">
+    <form style="padding-right: 120px;" v-on:submit.prevent="sendMessage">
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">From</label>

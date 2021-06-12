@@ -6,6 +6,7 @@ use App\Http\Requests\SendMailRequest;
 use App\Services\Interfaces\InterfaceSendMailService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class SendMailCommand extends Command
 {
@@ -73,7 +74,9 @@ class SendMailCommand extends Command
 
         $request = new SendMailRequest($data);
 
-        Validator::make($request->all(), $request->rules())->validate();
+        $validator = Validator::make($request->all(), $request->rules());
+
+        throw_if($validator->fails(), new ValidationException($validator));
 
         $this->mailService->send($request);
 

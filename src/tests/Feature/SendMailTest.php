@@ -92,26 +92,6 @@ class SendMailTest extends TestCase
         Queue::assertPushed(SendMailJob::class);
     }
 
-    public function testCommandSentMailIsSucceeded()
-    {
-        $this->artisan('send:mail "Hello World Subject" "Hello World Body"
-        "aka.3awd@gmail.com" "{\"name\":\"Kamal\", \"email\": \"ahmad.kamal@sixtysixten.com\"}"
-        "{\"name\":\"Kamal\", \"email\": \"ahmad.abukamal5@gmail.com\"}"
-        ')->assertExitCode(1);
-    }
-
-    public function testCommandSentMailIsPushedToQueue()
-    {
-        Queue::fake();
-
-        $this->artisan('send:mail "Hello World Subject" "Hello World Body"
-        "aka.3awd@gmail.com" "{\"name\":\"Kamal\", \"email\": \"ahmad.kamal@sixtysixten.com\"}"
-        "{\"name\":\"Kamal\", \"email\": \"ahmad.abukamal5@gmail.com\"}"
-        ')->assertExitCode(1);
-
-        Queue::assertPushed(SendMailJob::class);
-    }
-
     public function testHttpGetMailSuccessWithPaginationAfterInserting()
     {
         $get = $this->get('/api/v1/mails?per_page=1');

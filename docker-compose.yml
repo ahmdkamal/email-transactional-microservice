@@ -61,7 +61,7 @@ services:
 
   takeaway_supervisor:
     build:
-      context: ./supervisor
+      context: ./backend/supervisor
       dockerfile: Dockerfile
     container_name: takeaway_supervisor
     restart: unless-stopped

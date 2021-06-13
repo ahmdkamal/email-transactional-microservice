@@ -21,7 +21,7 @@ class Mailjet implements MailServerInterface
             Log::info('We are in Mailjet');
             $mailJetClient = new MailJetClient(
                 config('services.mailjet.key'),
-                config('services.mailjet.secre'),
+                config('services.mailjet.secret'),
                 true, ['version' => 'v3.1']
             );
             $body = $this->buildEmailObject($mail);

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\EmailRepository;
+use App\Repositories\Interfaces\EmailRepositoryInterface;
 use App\Services\Interfaces\SendMailInterface;
 use App\Services\Interfaces\SendMailServiceInterface;
 use App\Services\MailServers\Mailjet;
@@ -30,7 +31,7 @@ class MailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(EmailRepository::class, EmailRepository::class);
+        $this->app->bind(EmailRepositoryInterface::class, EmailRepository::class);
         $this->app->bind(SendMailServiceInterface::class, SendMailService::class);
 
         $this->app->singleton(SendMailInterface::class, function () {

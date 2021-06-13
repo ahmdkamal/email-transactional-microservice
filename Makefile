@@ -4,7 +4,7 @@ run:
 	echo "Installing docker"
 	cp .env.example .env
 	cd backend/src && cp .env.example .env
-	docker-compose up -d && ${BACKEND} composer install
+	docker-compose up -d && ${BACKEND} composer install && ${BACKEND} php artisan migrate
 	cd frontend && cp .env.example .env && docker-compose up -d
 	echo "WE ARE DONE Installing"
 

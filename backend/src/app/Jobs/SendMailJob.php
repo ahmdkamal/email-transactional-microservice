@@ -31,10 +31,10 @@ class SendMailJob implements ShouldQueue
     }
 
     /**
-     * @param SendMailInterface $sendMessage
+     * @param SendMailInterface $sendMail
      * @param EmailRepositoryInterface $emailRepository
      */
-    public function handle(SendMailInterface $sendMessage, EmailRepositoryInterface $emailRepository)
+    public function handle(SendMailInterface $sendMail, EmailRepositoryInterface $emailRepository)
     {
         $email = $emailRepository->findById($this->emailId);
 
@@ -46,7 +46,7 @@ class SendMailJob implements ShouldQueue
             ->cc($email->cc)
             ->bcc($email->bcc);
 
-        $status = $sendMessage->send($mail);
+        $status = $sendMail->send($mail);
 
         $email->fill([
             'status' => $status ? Email::DELIVERED_STATUS : Email::BOUNCED_STATUS,

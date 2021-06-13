@@ -9,17 +9,11 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class EmailRepository implements EmailRepositoryInterface
 {
     /**
-     * @var Email
-     */
-    protected Email $emailModel;
-
-    /**
      * EmailRepository constructor.
      * @param Email $emailModel
      */
-    public function __construct(Email $emailModel)
+    public function __construct(protected Email $emailModel)
     {
-        $this->emailModel = $emailModel;
     }
 
     /**

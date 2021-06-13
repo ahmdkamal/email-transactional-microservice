@@ -13,27 +13,12 @@ use Illuminate\Http\Request;
 class SendMailService implements SendMailServiceInterface
 {
     /**
-     * @var EmailRepositoryInterface
-     */
-    protected EmailRepositoryInterface $emailRepository;
-
-    /**
-     * @var SendMail
-     */
-    protected SendMailInterface $sendMail;
-
-    /**
      * SendMailService constructor.
      * @param EmailRepositoryInterface $emailRepository
-     * @param SendMail $sendMail
      */
-    public function __construct(
-        EmailRepositoryInterface $emailRepository,
-        SendMailInterface $sendMail
-    )
+
+    public function __construct(protected EmailRepositoryInterface $emailRepository)
     {
-        $this->emailRepository = $emailRepository;
-        $this->sendMail = $sendMail;
     }
 
     /**
@@ -53,6 +38,6 @@ class SendMailService implements SendMailServiceInterface
         $email = new Email($request->all() + ['content_type' => 'text/plain']);
         throw_if(!$this->emailRepository->save($email), new \Exception('Something went wrong!', 500));
 
-        SendMailJob::dispatch($this->sendMail, $this->emailRepository, $email->id);
+        SendMailJob::dispatch($email->id);
     }
 }

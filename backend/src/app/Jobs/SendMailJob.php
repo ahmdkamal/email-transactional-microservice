@@ -15,17 +15,6 @@ use Illuminate\Queue\SerializesModels;
 class SendMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * @var SendMailInterface
-     */
-    protected SendMailInterface $sendMessage;
-
-    /**
-     * @var EmailRepositoryInterface
-     */
-    protected EmailRepositoryInterface $emailRepository;
-
     /**
      * @var int
      */
@@ -33,29 +22,20 @@ class SendMailJob implements ShouldQueue
 
     /**
      * SendMailJob constructor.
-     * @param SendMailInterface $sendMessage
-     * @param EmailRepositoryInterface $emailRepository
      * @param int $emailId
      */
-    public function __construct(
-        SendMailInterface $sendMessage,
-        EmailRepositoryInterface $emailRepository,
-        int $emailId
-    )
+    public function __construct(int $emailId)
     {
-        $this->sendMessage = $sendMessage;
-        $this->emailRepository = $emailRepository;
         $this->emailId = $emailId;
     }
 
     /**
-     * Execute the job.
-     *
-     * @return void
+     * @param SendMailInterface $sendMessage
+     * @param EmailRepositoryInterface $emailRepository
      */
-    public function handle()
+    public function handle(SendMailInterface $sendMessage, EmailRepositoryInterface $emailRepository)
     {
-        $email = $this->emailRepository->findById($this->emailId);
+        $email = $emailRepository->findById($this->emailId);
 
         $mail = (new Mail())
             ->subject($email->subject)
@@ -65,12 +45,12 @@ class SendMailJob implements ShouldQueue
             ->cc($email->cc)
             ->bcc($email->bcc);
 
-        $status = $this->sendMessage->send($mail);
+        $status = $sendMessage->send($mail);
 
         $email->fill([
             'status' => $status ? Email::STATUSES['Delivered'] : Email::STATUSES['Bounced'],
         ]);
 
-        $this->emailRepository->save($email);
+        $emailRepository->save($email);
     }
 }

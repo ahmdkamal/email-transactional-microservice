@@ -9,24 +9,12 @@ use App\Services\Interfaces\SendMailInterface;
 class SendMail implements SendMailInterface
 {
     /**
-     * @var array <InterfaceMailServer>
-     */
-    protected array $fallbackServers;
-
-    /**
-     * @var MailServerInterface
-     */
-    protected MailServerInterface $mainServer;
-
-    /**
      * SendMail constructor.
      * @param MailServerInterface $mainServer
      * @param array<MailServerInterface> $fallbackServers
      */
-    public function __construct(MailServerInterface $mainServer, array $fallbackServers)
+    public function __construct(protected MailServerInterface $mainServer, protected array $fallbackServers)
     {
-        $this->mainServer = $mainServer;
-        $this->fallbackServers = $fallbackServers;
     }
 
     /**

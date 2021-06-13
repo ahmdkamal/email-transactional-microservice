@@ -11,13 +11,12 @@ use Illuminate\Http\Request;
 class SendMailController extends Controller
 {
     /**
-     * @var SendMailServiceInterface
+     * SendMailController constructor.
+     * @param SendMailServiceInterface $mailService
      */
-    protected SendMailServiceInterface $mailService;
-
-    public function __construct(SendMailServiceInterface $mailService)
+    public function __construct(protected SendMailServiceInterface $mailService)
     {
-        $this->mailService = $mailService;
+
     }
 
     /**

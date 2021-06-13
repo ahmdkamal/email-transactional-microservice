@@ -14,11 +14,11 @@ class Mail
 
     public array $from = [];
 
-    public array $tos = [];
+    public array $to = [];
 
-    public array $ccs = [];
+    public array $cc = [];
 
-    public array $bcs = [];
+    public array $bcc = [];
 
     /**
      * Set Mail's Subject
@@ -79,7 +79,7 @@ class Mail
      */
     public function to(array|null|string $addresses): Mail
     {
-        $this->tos = array_merge($this->tos, $this->parseAddresses($addresses));
+        $this->to = array_merge($this->to, $this->parseAddresses($addresses));
 
         return $this;
     }
@@ -91,7 +91,7 @@ class Mail
      */
     public function cc(array|null|string $addresses): Mail
     {
-        $this->ccs = array_merge($this->ccs, $this->parseAddresses($addresses));
+        $this->cc = array_merge($this->cc, $this->parseAddresses($addresses));
 
         return $this;
     }
@@ -103,7 +103,7 @@ class Mail
      */
     public function bcc(array|null|string $addresses): Mail
     {
-        $this->bcs = array_merge($this->bcs, $this->parseAddresses($addresses));
+        $this->bcc = array_merge($this->bcc, $this->parseAddresses($addresses));
 
         return $this;
     }
@@ -131,9 +131,9 @@ class Mail
             'subject' => $this->subject,
             'body' => $this->body,
             'content_type' => $this->contentType,
-            'tos' => $this->tos,
-            'ccs' => $this->ccs,
-            'bccs' => $this->bcs,
+            'tos' => $this->to,
+            'ccs' => $this->cc,
+            'bcc' => $this->bcc,
         ];
     }
 }

@@ -44,20 +44,16 @@ class Sendgrid implements MailServerInterface
         $email->setFrom($mail->from[0], $mail->from[1]);
         $email->addContent($mail->contentType, $mail->body);
 
-        foreach ($mail->tos as $to) {
+        foreach ($mail->to as $to) {
             $email->addTo($to[0], $to[1]);
         }
 
-        if (!is_null($mail->ccs) && $mail->ccs !== []) {
-            foreach ($mail->ccs as $cc) {
-                $email->addCc($cc[0], $cc[1]);
-            }
+        foreach ($mail->cc as $cc) {
+            $email->addCc($cc[0], $cc[1]);
         }
 
-        if (!is_null($mail->bcs) && $mail->bcs !== []) {
-            foreach ($mail->bcs as $bc) {
-                $email->addBcc($bc[0], $bc[1]);
-            }
+        foreach ($mail->bcc as $bc) {
+            $email->addBcc($bc[0], $bc[1]);
         }
 
         return $email;

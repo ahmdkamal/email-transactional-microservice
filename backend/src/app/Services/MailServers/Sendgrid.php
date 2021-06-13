@@ -17,16 +17,19 @@ class Sendgrid implements MailServerInterface
     public function send(Mail $mail): bool
     {
         try {
+            Log::info('We are in Sendgrid');
             $email = $this->buildEMailObject($mail);
             $response = new \SendGrid(config('services.sendgrid.api_key'));
             $response = $response->send($email);
 
-            throw_if(!in_array($response->statusCode(), [200, 202]), new \Exception('Something went wrong!'));
+            throw_if(!in_array($response->statusCode(), [200, 202,]), new \Exception('Something went wrong!'));
 
             return true;
         } catch (\Exception $exception) {
-            Log::info($exception->getMessage());
-            Log::info($exception->getLine());
+            Log::error($exception->getMessage(), [
+                'errorMessage' => $exception->getMessage(),
+                'errorLine' => $exception->getLine(),
+            ]);
         }
 
         return false;

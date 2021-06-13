@@ -30,7 +30,10 @@ class Mailjet implements MailServerInterface
 
             return true;
         } catch (\Exception $exception) {
-            Log::info($exception->getMessage());
+            Log::error($exception->getMessage(), [
+                'errorMessage' => $exception->getMessage(),
+                'errorLine' => $exception->getLine(),
+            ]);
         }
 
         return false;

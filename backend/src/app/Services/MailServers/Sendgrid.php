@@ -18,7 +18,7 @@ class Sendgrid implements MailServerInterface
     {
         try {
             $email = $this->buildEMailObject($mail);
-            $response = new \SendGrid(config('service.sendgird.api_key'));
+            $response = new \SendGrid(config('services.sendgrid.api_key'));
             $response = $response->send($email);
 
             throw_if(!in_array($response->statusCode(), [200, 202]), new \Exception('Something went wrong!'));

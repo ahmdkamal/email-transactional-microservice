@@ -25,24 +25,11 @@ class SendMailCommand extends Command
     protected $description = 'Send Mail {from_email} {subject} {body} {to?*} {--from_name=} {--cc=*} {--bcc=*}';
 
     /**
-     * The Mail Service to send message
-     * @var SendMailServiceInterface
-     */
-    protected SendMailServiceInterface $mailService;
-
-    /**
-     * The Mail Request Form to Validate message
-     * @var SendMailRequest
-     */
-    protected SendMailRequest $sendMailRequest;
-
-    /**
      * SendMailCommand constructor.
      * @param SendMailServiceInterface $mailService
      */
-    public function __construct(SendMailServiceInterface $mailService)
+    public function __construct(protected SendMailServiceInterface $mailService)
     {
-        $this->mailService = $mailService;
         parent::__construct();
     }
 

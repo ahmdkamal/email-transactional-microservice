@@ -15,6 +15,7 @@ use Illuminate\Queue\SerializesModels;
 class SendMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     /**
      * @var int
      */
@@ -48,7 +49,7 @@ class SendMailJob implements ShouldQueue
         $status = $sendMessage->send($mail);
 
         $email->fill([
-            'status' => $status ? Email::STATUSES['Delivered'] : Email::STATUSES['Bounced'],
+            'status' => $status ? Email::DELIVERED_STATUS : Email::BOUNCED_STATUS,
         ]);
 
         $emailRepository->save($email);

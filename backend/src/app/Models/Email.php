@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Email extends Model
 {
     protected $fillable = [
-        'from_email', 'from_name', 'status',
-        'body', 'subject', 'content_type',
-        'to', 'cc', 'bcc',
+        'from_email',
+        'from_name',
+        'status',
+        'body',
+        'subject',
+        'content_type',
+        'to',
+        'cc',
+        'bcc',
     ];
 
     protected $casts = [
@@ -18,13 +24,14 @@ class Email extends Model
         'bcc' => 'array',
     ];
 
-    const STATUSES = [
-        0 => 'Queued',
-        1 => 'Bounced',
-        2 => 'Delivered',
+    public const QUEUED_STATUS = 0;
+    public const BOUNCED_STATUS = 1;
+    public const DELIVERED_STATUS = 2;
 
-        'Bounced' => 1,
-        'Delivered' => 2,
+    public const STATUSES = [
+        self::QUEUED_STATUS => 'Queued',
+        self::BOUNCED_STATUS => 'Bounced',
+        self::DELIVERED_STATUS => 'Delivered',
     ];
 
     public function getStatusAsStringAttribute()

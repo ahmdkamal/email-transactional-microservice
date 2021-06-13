@@ -8,9 +8,9 @@ services:
       - "7336:80"
       - "7337:443"
     volumes:
-      - ./backenc/src:/var/www
-      - ./backenc/nginx/conf.d:/etc/nginx/conf.d/
-      - ./backenc/nginx/logs/:/var/log/nginx/
+      - ./backend/src:/var/www
+      - ./backend/nginx/conf.d:/etc/nginx/conf.d/
+      - ./backend/nginx/logs/:/var/log/nginx/
     networks:
       - takeaway_network
 
@@ -26,8 +26,8 @@ services:
     depends_on:
       - takeaway_db
     volumes:
-      - ./backenc/src:/var/www/
-      - ./backenc/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./backend/src:/var/www/
+      - ./backend/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - takeaway_network
 
@@ -45,7 +45,7 @@ services:
        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./backenc/data:/var/lib/mysql
+      - ./backend/data:/var/lib/mysql
     networks:
       - takeaway_network
 

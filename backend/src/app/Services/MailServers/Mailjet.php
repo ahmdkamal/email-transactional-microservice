@@ -57,7 +57,7 @@ class Mailjet implements MailServerInterface
         }
 
         $body['To'] = $this->buildReception($mail->to);
-        $body['Bcc'] = $this->buildReception($mail->bc);
+        $body['Bcc'] = $this->buildReception($mail->bcc);
         $body['Cc'] = $this->buildReception($mail->cc);
 
         if ($mail->contentType === 'text/plain') {

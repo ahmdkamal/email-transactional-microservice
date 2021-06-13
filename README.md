@@ -24,6 +24,7 @@ Docker
 ### Available Commands
 - `make run` to run the containers and install its dependencies.
 - `make test` to run PhpUnit test cases
+- `make supervisor-restart` to restart supervisor after changing any of these keys `SENDGRID_API_KEY`, `MailJET_KEY`, `MailJET_SECRET` in backend/src/.env
 
 ### Why ?
 

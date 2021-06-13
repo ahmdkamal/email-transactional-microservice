@@ -11,3 +11,7 @@ run:
 
 test:
 	${BACKEND} ./vendor/bin/phpunit
+
+
+supervisor-restart:
+	docker restart takeaway_supervisor

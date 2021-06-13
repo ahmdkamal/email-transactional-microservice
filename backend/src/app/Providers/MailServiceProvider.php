@@ -8,6 +8,7 @@ use App\Services\Interfaces\SendMailServiceInterface;
 use App\Services\MailServers\Mailjet;
 use App\Services\MailServers\Sendgrid;
 use App\Services\SendMail;
+use App\Services\SendMailService;
 use Illuminate\Support\ServiceProvider;
 
 class MailServiceProvider extends ServiceProvider
@@ -30,7 +31,7 @@ class MailServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(EmailRepository::class, EmailRepository::class);
-        $this->app->bind(SendMailServiceInterface::class, SendMailServiceInterface::class);
+        $this->app->bind(SendMailServiceInterface::class, SendMailService::class);
 
         $this->app->singleton(SendMailInterface::class, function () {
             return new SendMail(new Sendgrid, [

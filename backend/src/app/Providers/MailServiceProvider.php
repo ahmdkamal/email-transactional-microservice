@@ -3,12 +3,14 @@
 namespace App\Providers;
 
 use App\Repositories\EmailRepository;
+use App\Services\Interfaces\SendMailInterface;
 use App\Services\Interfaces\SendMailServiceInterface;
 use App\Services\MailServers\Mailjet;
 use App\Services\MailServers\Sendgrid;
+use App\Services\SendMail;
 use Illuminate\Support\ServiceProvider;
 
-class InterfaceServiceProvider extends ServiceProvider
+class MailServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -31,7 +33,9 @@ class InterfaceServiceProvider extends ServiceProvider
         $this->app->bind(SendMailServiceInterface::class, SendMailServiceInterface::class);
 
         $this->app->singleton(SendMailInterface::class, function () {
-            return new SendMailInterface(new Sendgrid, [new Mailjet]);
+            return new SendMail(new Sendgrid, [
+                new Mailjet,
+            ]);
         });
     }
 }

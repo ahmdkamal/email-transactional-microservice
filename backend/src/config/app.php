@@ -178,7 +178,7 @@ return [
         /*
          * Own Service Providers ...
          */
-        \App\Providers\InterfaceServiceProvider::class,
+        \App\Providers\MailServiceProvider::class,
     ],
 
     /*

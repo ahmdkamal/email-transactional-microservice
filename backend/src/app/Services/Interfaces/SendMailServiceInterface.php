@@ -5,7 +5,7 @@ namespace App\Services\Interfaces;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
-interface InterfaceSendMailService
+interface SendMailServiceInterface
 {
     /**
      * @param Request $request

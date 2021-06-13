@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\InterfaceMailServer;
-use App\Services\Interfaces\InterfaceSendMail;
+use App\Services\Interfaces\MailServerInterface;
+use App\Services\Interfaces\SendMailInterface;
 
-class SendMail implements InterfaceSendMail
+class SendMail implements SendMailInterface
 {
     /**
      * @var array <InterfaceMailServer>
@@ -14,16 +14,16 @@ class SendMail implements InterfaceSendMail
     protected array $fallbackServers;
 
     /**
-     * @var InterfaceMailServer
+     * @var MailServerInterface
      */
-    protected InterfaceMailServer $mainServer;
+    protected MailServerInterface $mainServer;
 
     /**
      * SendMail constructor.
-     * @param InterfaceMailServer $mainServer
-     * @param array<InterfaceMailServer> $fallbackServers
+     * @param MailServerInterface $mainServer
+     * @param array<MailServerInterface> $fallbackServers
      */
-    public function __construct(InterfaceMailServer $mainServer, array $fallbackServers)
+    public function __construct(MailServerInterface $mainServer, array $fallbackServers)
     {
         $this->mainServer = $mainServer;
         $this->fallbackServers = $fallbackServers;
@@ -52,10 +52,10 @@ class SendMail implements InterfaceSendMail
     /**
      * To Set the main server to send with
      *
-     * @param InterfaceMailServer $mainServer
+     * @param MailServerInterface $mainServer
      * @return $this
      */
-    public function setMainServer(InterfaceMailServer $mainServer): SendMail
+    public function setMainServer(MailServerInterface $mainServer): SendMail
     {
         $this->mainServer = $mainServer;
         return $this;
@@ -63,7 +63,7 @@ class SendMail implements InterfaceSendMail
 
     /**
      * To Set the fallback servers
-     * @param array<InterfaceSendMail> $fallbackServers
+     * @param array<SendMail> $fallbackServers
      * @return $this
      */
     public function setFallbackServers(array $fallbackServers): SendMail

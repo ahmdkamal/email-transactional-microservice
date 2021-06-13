@@ -3,12 +3,12 @@
 namespace App\Services\MailServers;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\InterfaceMailServer;
+use App\Services\Interfaces\MailServerInterface;
 use Illuminate\Support\Facades\Log;
 use \Mailjet\Client as MailJetClient;
 use Mailjet\Resources;
 
-class Mailjet implements InterfaceMailServer
+class Mailjet implements MailServerInterface
 {
     /**
      * @var string

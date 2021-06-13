@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Requests\SendMailRequest;
-use App\Services\Interfaces\InterfaceSendMailService;
+use App\Services\Interfaces\SendMailServiceInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -26,9 +26,9 @@ class SendMailCommand extends Command
 
     /**
      * The Mail Service to send message
-     * @var InterfaceSendMailService
+     * @var SendMailServiceInterface
      */
-    protected InterfaceSendMailService $mailService;
+    protected SendMailServiceInterface $mailService;
 
     /**
      * The Mail Request Form to Validate message
@@ -38,9 +38,9 @@ class SendMailCommand extends Command
 
     /**
      * SendMailCommand constructor.
-     * @param InterfaceSendMailService $mailService
+     * @param SendMailServiceInterface $mailService
      */
-    public function __construct(InterfaceSendMailService $mailService)
+    public function __construct(SendMailServiceInterface $mailService)
     {
         $this->mailService = $mailService;
         parent::__construct();

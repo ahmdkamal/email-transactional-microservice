@@ -4,7 +4,7 @@ namespace App\Services\Interfaces;
 
 use App\Entities\Mail;
 
-interface InterfaceMailServer
+interface MailServerInterface
 {
     /**
      * @param Mail $mail

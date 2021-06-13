@@ -3,11 +3,11 @@
 namespace App\Services\MailServers;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\InterfaceMailServer;
+use App\Services\Interfaces\MailServerInterface;
 use Illuminate\Support\Facades\Log;
 use \SendGrid\Mail\Mail as SendGridMail;
 
-class Sendgrid implements InterfaceMailServer
+class Sendgrid implements MailServerInterface
 {
     /**
      * @var string

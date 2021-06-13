@@ -5,7 +5,7 @@ namespace App\Repositories\Interfaces;
 use App\Models\Email;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-interface InterfaceEmailRepository
+interface EmailRepositoryInterface
 {
     public function index($perPage = 15): LengthAwarePaginator;
 

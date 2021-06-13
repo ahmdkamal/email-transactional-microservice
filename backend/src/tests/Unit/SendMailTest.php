@@ -3,19 +3,19 @@
 namespace Tests\Unit;
 
 use App\Entities\Mail;
-use App\Services\Interfaces\InterfaceSendMail;
+use App\Services\Interfaces\SendMailInterface;
 use App\Services\MailServers\Mailjet;
 use App\Services\MailServers\Sendgrid;
 use Tests\TestCase;
 
 class SendMailTest extends TestCase
 {
-    protected InterfaceSendMail $sendMail;
+    protected SendMailInterface $sendMail;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->sendMail = $this->app->get(InterfaceSendMail::class);
+        $this->sendMail = $this->app->get(SendMailInterface::class);
     }
 
     public function testMainServiceWillReturnTrue()

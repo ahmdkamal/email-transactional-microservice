@@ -4,32 +4,32 @@ namespace App\Services;
 
 use App\Jobs\SendMailJob;
 use App\Models\Email;
-use App\Repositories\Interfaces\InterfaceEmailRepository;
-use App\Services\Interfaces\InterfaceSendMail;
-use App\Services\Interfaces\InterfaceSendMailService;
+use App\Repositories\Interfaces\EmailRepositoryInterface;
+use App\Services\Interfaces\SendMailInterface;
+use App\Services\Interfaces\SendMailServiceInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
-class SendMailService implements InterfaceSendMailService
+class SendMailService implements SendMailServiceInterface
 {
     /**
-     * @var InterfaceEmailRepository
+     * @var EmailRepositoryInterface
      */
-    protected InterfaceEmailRepository $emailRepository;
+    protected EmailRepositoryInterface $emailRepository;
 
     /**
-     * @var InterfaceSendMail
+     * @var SendMail
      */
-    protected InterfaceSendMail $sendMail;
+    protected SendMailInterface $sendMail;
 
     /**
      * SendMailService constructor.
-     * @param InterfaceEmailRepository $emailRepository
-     * @param InterfaceSendMail $sendMail
+     * @param EmailRepositoryInterface $emailRepository
+     * @param SendMail $sendMail
      */
     public function __construct(
-        InterfaceEmailRepository $emailRepository,
-        InterfaceSendMail $sendMail
+        EmailRepositoryInterface $emailRepository,
+        SendMailInterface $sendMail
     )
     {
         $this->emailRepository = $emailRepository;

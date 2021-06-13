@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Email;
-use App\Repositories\Interfaces\InterfaceEmailRepository;
+use App\Repositories\Interfaces\EmailRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-class EmailRepository implements InterfaceEmailRepository
+class EmailRepository implements EmailRepositoryInterface
 {
     /**
      * @var Email

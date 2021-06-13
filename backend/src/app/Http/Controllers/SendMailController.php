@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SendMailRequest;
 use App\Http\Resources\MailCollection;
-use App\Services\Interfaces\InterfaceSendMailService;
+use App\Services\Interfaces\SendMailServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SendMailController extends Controller
 {
     /**
-     * @var InterfaceSendMailService
+     * @var SendMailServiceInterface
      */
-    protected InterfaceSendMailService $mailService;
+    protected SendMailServiceInterface $mailService;
 
-    public function __construct(InterfaceSendMailService $mailService)
+    public function __construct(SendMailServiceInterface $mailService)
     {
         $this->mailService = $mailService;
     }

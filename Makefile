@@ -5,7 +5,7 @@ run:
 	cp .env.example .env
 	cd backend/src && cp .env.example .env
 	docker-compose up -d && ${BACKEND} composer install
-	cd frontend && cp .env.exmaple .env && docker-compose up -d
+	cd frontend && cp .env.example .env && docker-compose up -d
 	echo "WE ARE DONE Installing"
 
 test:

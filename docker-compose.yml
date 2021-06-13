@@ -8,15 +8,15 @@ services:
       - "7336:80"
       - "7337:443"
     volumes:
-      - ./src:/var/www
-      - ./nginx/conf.d:/etc/nginx/conf.d/
-      - ./nginx/logs/:/var/log/nginx/
+      - ./backenc/src:/var/www
+      - ./backenc/nginx/conf.d:/etc/nginx/conf.d/
+      - ./backenc/nginx/logs/:/var/log/nginx/
     networks:
       - takeaway_network
 
   takeaway_www:
     build:
-      context: ./php
+      context: ./backend/php
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: takeaway_www
@@ -26,8 +26,8 @@ services:
     depends_on:
       - takeaway_db
     volumes:
-      - ./src:/var/www/
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./backenc/src:/var/www/
+      - ./backenc/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - takeaway_network
 
@@ -45,9 +45,7 @@ services:
        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./dump:/docker-entrypoint-initdb.d
-      - ./conf:/etc/mysql/conf.d
-      - ./data:/var/lib/mysql
+      - ./backenc/data:/var/lib/mysql
     networks:
       - takeaway_network
 
@@ -73,8 +71,8 @@ services:
       - QUEUE_DRIVER=${QUEUE_CONNECTION}
       - NUM_PROCS=${NUM_PROCS}
     volumes:
-      - ./src:/var/www
-      - ./supervisor/supervisord.conf:/etc/supervisord.conf
+      - ./backenc/src:/var/www
+      - ./backenc/supervisor/supervisord.conf:/etc/supervisord.conf
     networks:
       - takeaway_network
 

@@ -11,25 +11,6 @@ use Mailjet\Resources;
 class Mailjet implements MailServerInterface
 {
     /**
-     * @var string
-     */
-    protected string $apiKey;
-
-    /**
-     * @var string
-     */
-    protected string $apiSecret;
-
-    /**
-     * Mailjet constructor.
-     */
-    public function __construct()
-    {
-        $this->apiKey = env('MailJET_KEY', '');
-        $this->apiSecret = env('MailJET_SECRET', '');
-    }
-
-    /**
      * @param Mail $mail
      * @return bool
      * @throws \Throwable
@@ -38,7 +19,11 @@ class Mailjet implements MailServerInterface
     {
         try {
             Log::info('We are in Mailjet');
-            $mailJetClient = new MailJetClient($this->apiKey, $this->apiSecret, true, ['version' => 'v3.1']);
+            $mailJetClient = new MailJetClient(
+                config('services.mailjet.key'),
+                config('services.mailjet.secre'),
+                true, ['version' => 'v3.1']
+            );
             $body = $this->buildEmailObject($mail);
             $response = $mailJetClient->post(Resources::$Email, ['body' => $body]);
             throw_if(!$response->success(), new \Exception('Something went wrong!'));

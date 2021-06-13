@@ -10,19 +10,6 @@ use \SendGrid\Mail\Mail as SendGridMail;
 class Sendgrid implements MailServerInterface
 {
     /**
-     * @var string
-     */
-    protected string $apiKey;
-
-    /**
-     * Sendgrid constructor.
-     */
-    public function __construct()
-    {
-        $this->apiKey = env('SENDGRID_API_KEY', '');
-    }
-
-    /**
      * @param Mail $mail
      * @return bool
      * @throws \Throwable
@@ -31,7 +18,7 @@ class Sendgrid implements MailServerInterface
     {
         try {
             $email = $this->buildEMailObject($mail);
-            $response = new \SendGrid($this->apiKey);
+            $response = new \SendGrid(config('service.sendgird.api_key'));
             $response = $response->send($email);
 
             throw_if(!in_array($response->statusCode(), [200, 202]), new \Exception('Something went wrong!'));

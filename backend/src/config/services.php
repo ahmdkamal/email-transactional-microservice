@@ -30,4 +30,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'sendgird' => [
+        'api_key' => env('SENDGRID_API_KEY', ''),
+    ],
+
+    'mailjet' => [
+        'key' => env('MailJET_KEY', ''),
+        'secret' => env('MailJET_SECRET', '')
+    ],
 ];
